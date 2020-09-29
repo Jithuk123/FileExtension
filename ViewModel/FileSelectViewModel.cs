@@ -12,10 +12,8 @@ namespace MVVM.ViewModel
 {
     public class FileSelectViewModel
     {
-        private string fileName;
-        private string fileContent;
-      
-       
+
+
         private ICommand mUpdater;
         public ICommand UpdateCommand
         {
@@ -33,6 +31,9 @@ namespace MVVM.ViewModel
     }
     class Updater : ICommand
     {
+        private string fileName;
+        private string fileContent;
+
         #region ICommand Members
 
         public bool CanExecute(object parameter)
@@ -63,8 +64,8 @@ namespace MVVM.ViewModel
                 // Load content of file in a TextBlock
                 if (result == true)
                 {
-                   fileName = openFileDlg.FileName;
-                    FileContent.Text = System.IO.File.ReadAllText(openFileDlg.FileName);
+                    fileName = openFileDlg.FileName;
+                    fileContent = System.IO.File.ReadAllText(openFileDlg.FileName);
                 }
             }
             catch (System.Exception)

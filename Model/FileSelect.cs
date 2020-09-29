@@ -11,8 +11,9 @@ namespace MVVM.Model
     {
         private string fName;
         private string fcontent;
-
+        //Define an event based on delegates
         public event PropertyChangedEventHandler PropertyChanged;
+        //Raise the event
         public void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
@@ -33,15 +34,18 @@ namespace MVVM.Model
                 OnPropertyChanged("Name");
             }
         }
-        public string FileContent{
-            get{
+        public string FileContent
+        {
+            get
+            {
                 return fcontent;
             }
-            set{
-                fcontent=value;
+            set
+            {
+                fcontent = value;
                 OnPropertyChanged("Name");
             }
         }
-      
+
     }
 }
