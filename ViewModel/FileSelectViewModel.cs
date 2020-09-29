@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using MVVM.Model;
 using Microsoft.Win32;
+using System.Configuration;
 
 namespace MVVM.ViewModel
 {
@@ -40,7 +41,7 @@ namespace MVVM.ViewModel
         {
             return true;
         }
-
+//Raised when something has changed that will affect the ability of commands to execute.
         public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
@@ -49,10 +50,14 @@ namespace MVVM.ViewModel
 
         public void Execute(object parameter)
         {
+            var supportFileFormat = ConfigurationManager.ConnectionStrings["fileFormat"].ConnectionString; 
+            System.Console.WriteLine(supportFileFormat); 
             OpenFileDialog openFileDlg = new OpenFileDialog();
             // Set filter for file extension and default file extension  
-            openFileDlg.DefaultExt = ".txt";
-            openFileDlg.Filter = "Text documents (.txt)|*.txt";
+            // openFileDlg.DefaultExt = ".txt";
+             openFileDlg.Filter = "Text documents (.txt)|*.txt";
+             openFileDlg.DefaultExt = supportFileFormat;
+       
 
             // Launch OpenFileDialog by calling ShowDialog method
             //specifies whether the activity was accepted (true) or canceled (false).

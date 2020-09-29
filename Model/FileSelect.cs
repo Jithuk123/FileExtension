@@ -31,7 +31,7 @@ namespace MVVM.Model
             set
             {
                 fName = value;
-                OnPropertyChanged("Name");
+                OnPropertyChanged("fileName");
             }
         }
         public string FileContent
@@ -43,7 +43,7 @@ namespace MVVM.Model
             set
             {
                 fcontent = value;
-                OnPropertyChanged("Name");
+                OnPropertyChanged("FileContent");
             }
         }
 
