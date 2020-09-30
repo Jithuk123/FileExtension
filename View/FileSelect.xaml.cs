@@ -23,7 +23,7 @@ namespace MVVM.View
         {
             InitializeComponent();
 
-            MVVM.Model.Files Files = new MVVM.Model.Files();
+            MVVM.ViewModel.FileSelectViewModel Files = new MVVM.ViewModel.FileSelectViewModel();
 
             this.DataContext = Files;
 

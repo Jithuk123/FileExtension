@@ -9,17 +9,50 @@ using MVVM.Model;
 using Microsoft.Win32;
 using System.Configuration;
 using MVVMFileMange.Command;
-
-
+using System.ComponentModel;
 
 namespace MVVM.ViewModel
 {
-    public class FileSelectViewModel
+    public class FileSelectViewModel:INotifyPropertyChanged
     {
-        public RelayCommand relayCommand { get; set; }
+       
+        public ICommand relayCommand { get; set; }
+        public Files FilesDetails { 
+            get
+            {
+                return _FileDetails;
+            }
+            set
+            {
+                _FileDetails = value;
+                OnPropertyChanged("FilesDetails");
+            }}
+  public string FilesContent { 
+            get
+            {
+                return _Filecontent;
+            }
+            set
+            {
+                _Filecontent = value;
+                OnPropertyChanged("FilesContent");
+            }}
+            private Files _FileDetails;
+            private string _Filecontent;
+             public event PropertyChangedEventHandler PropertyChanged;
+        //Raise the event
+        public void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                //publishing the event in current classs
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
         public FileSelectViewModel()
         {
             relayCommand = new RelayCommand(Execute,CanExecute);
+            _FileDetails=new Files();
         }
         public bool CanExecute(object param)
         {
@@ -27,7 +60,7 @@ namespace MVVM.ViewModel
         }
         public void Execute(object param)
         {
-            var file= new Files();
+            // var file= new Files();
             //     var supportFileFormat = ConfigurationManager.AppSettings["fileFormat"];
             //   Console.WriteLine(supportFileFormat); 
             OpenFileDialog openFileDlg = new OpenFileDialog();
@@ -46,9 +79,12 @@ namespace MVVM.ViewModel
                 // Load content of file in a TextBlock
                 if (result == true)
                 {
-                    file.selectedFileName = openFileDlg.FileName;
-                    file.selectedFileContent = System.IO.File.ReadAllText(openFileDlg.FileName);
+                    FilesDetails.selectedFileName = openFileDlg.FileName;
+                    FilesDetails.selectedFileContent = System.IO.File.ReadAllText(openFileDlg.FileName);
+
+                    FilesContent= openFileDlg.FileName;
                 }
+                
             }
             catch (System.Exception)
             {

@@ -16,7 +16,7 @@
     </Grid.RowDefinitions>
     <TextBlock Text="ExFile Manager Application" HorizontalAlignment="Center" Margin="20,5,20,0"/>
     <TextBox HorizontalAlignment="Center" Height="40" Margin="30,35,0,0" TextWrapping="Wrap" 
-          Text="{Binding selectedFileName ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+          Text="{Binding FilesContent ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
              VerticalAlignment="Top" Width="476" Name="fileName" />
 
     <Button x:Name="BrowseButton" Content="Browse a file" HorizontalAlignment="Right"  Margin="485,35,10,0" 
@@ -26,7 +26,7 @@
         <ScrollViewer>
             <TextBlock 
                        HorizontalAlignment="Left" Margin="30,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Name="fileContent"
-                    Text="{Binding selectedFileContent,UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding FilesDetails.selectedFileContent,UpdateSourceTrigger=PropertyChanged}"
                     /> 
         </ScrollViewer>
     </Grid>
