@@ -32,19 +32,6 @@ namespace MVVM.ViewModel
                 OnPropertyChanged("FileDetails");
             }
         }
-        private string _fileContent;
-        public string FileContent
-        {
-            get
-            {
-                return _fileContent;
-            }
-            set
-            {
-                _fileContent = value;
-                OnPropertyChanged(nameof(FileContent));
-            }
-        }
 
         //Raise the event
         public void OnPropertyChanged(string propertyName)
@@ -61,7 +48,7 @@ namespace MVVM.ViewModel
         }
         public void Execute(object param)
         {
-            // var file= new Files();
+
             //     var supportFileFormat = ConfigurationManager.AppSettings["fileFormat"];
             //   Console.WriteLine(supportFileFormat); 
             OpenFileDialog openFileDlg = new OpenFileDialog();
@@ -82,10 +69,7 @@ namespace MVVM.ViewModel
                 {
                     FileDetails.SelectedFileName = openFileDlg.FileName;
                     FileDetails.SelectedFileContent = System.IO.File.ReadAllText(openFileDlg.FileName);
-
-                    FileContent = openFileDlg.FileName;
                 }
-
             }
             catch (System.Exception)
             {

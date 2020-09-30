@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <TextBlock Text="ExFile Manager Application" HorizontalAlignment="Center" Margin="20,5,20,0"/>
         <TextBox HorizontalAlignment="Center" Height="40" Margin="30,35,0,0" TextWrapping="Wrap" 
-                    Text="{Binding FileContent ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" VerticalAlignment="Top" 
+                    Text="{Binding FileDetails.SelectedFileName ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" VerticalAlignment="Top" 
                     Width="476" Name="fileName" />
 
         <Button x:Name="BrowseButton" Content="Browse a file" HorizontalAlignment="Right" Margin="485,35,10,0" 
