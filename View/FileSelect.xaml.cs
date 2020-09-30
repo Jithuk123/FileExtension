@@ -22,6 +22,11 @@ namespace MVVM.View
         public FileSelect()
         {
             InitializeComponent();
+
+            MVVM.Model.Files Files = new MVVM.Model.Files();
+
+            this.DataContext = Files;
+
         }
     }
 }

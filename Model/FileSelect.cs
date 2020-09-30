@@ -9,8 +9,8 @@ namespace MVVM.Model
 {
     public class Files : INotifyPropertyChanged
     {
-        private string fName;
-        private string fcontent;
+        public string fName;
+        public string fcontent;
         //Define an event based on delegates
         public event PropertyChangedEventHandler PropertyChanged;
         //Raise the event
@@ -18,11 +18,12 @@ namespace MVVM.Model
         {
             if (PropertyChanged != null)
             {
+                //publishing the event in current classs
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
-        public string fileName
+        public string selectedFileName
         {
             get
             {
@@ -34,7 +35,7 @@ namespace MVVM.Model
                 OnPropertyChanged("fileName");
             }
         }
-        public string FileContent
+        public string selectedFileContent
         {
             get
             {
@@ -43,7 +44,7 @@ namespace MVVM.Model
             set
             {
                 fcontent = value;
-                OnPropertyChanged("FileContent");
+                OnPropertyChanged("fileContent");
             }
         }
 

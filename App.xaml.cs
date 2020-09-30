@@ -16,10 +16,7 @@ namespace MVVMFileMange
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            MVVM.View.FileSelect files = new MVVM.View.FileSelect();
-            MVVM.ViewModel.FileSelectViewModel FileSelectViewModel = new MVVM.ViewModel.FileSelectViewModel();
-            files.DataContext = FileSelectViewModel;
-            files.Show();
+            
         }
     }
 }

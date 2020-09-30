@@ -1,9 +1,7 @@
 C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange.csprojAssemblyReference.cache
-C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MainWindow.g.cs
 C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\View\FileSelect.g.cs
 C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\App.g.cs
 C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange_MarkupCompile.cache
-C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange_MarkupCompile.lref
 C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\View\FileSelect.baml
 C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\MVVMFileMange.exe
 C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\MVVMFileMange.deps.json
@@ -11,7 +9,6 @@ C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\MVVMFileMange.
 C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\MVVMFileMange.runtimeconfig.dev.json
 C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\MVVMFileMange.dll
 C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\MVVMFileMange.pdb
-C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MainWindow.baml
 C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange.g.resources
 C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange.AssemblyInfoInputs.cache
 C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange.AssemblyInfo.cs
@@ -19,3 +16,5 @@ C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange.
 C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange.dll
 C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange.pdb
 C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange.genruntimeconfig.cache
+C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
+C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange_MarkupCompile.lref
