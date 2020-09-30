@@ -1,16 +1,12 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MVVM.Model
 {
     public class Files : INotifyPropertyChanged
     {
-        public string fName;
-        public string fcontent;
+        private string _fName;
+        private  string _fContent;
+        
         //Define an event based on delegates
         public event PropertyChangedEventHandler PropertyChanged;
         //Raise the event
@@ -23,30 +19,29 @@ namespace MVVM.Model
             }
         }
 
-        public string selectedFileName
+        public string SelectedFileName
         {
             get
             {
-                return fName;
+                return _fName;
             }
             set
             {
-                fName = value;
-                OnPropertyChanged("fileName");
+                _fName = value;
+                OnPropertyChanged("SelectedFileName");
             }
         }
-        public string selectedFileContent
+        public string SelectedFileContent
         {
             get
             {
-                return fcontent;
+                return _fContent;
             }
             set
             {
-                fcontent = value;
-                OnPropertyChanged("fileContent");
+                _fContent = value;
+                OnPropertyChanged("SelectedFileContent");
             }
         }
-
     }
 }

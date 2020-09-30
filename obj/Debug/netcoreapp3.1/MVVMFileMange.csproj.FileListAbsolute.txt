@@ -18,3 +18,23 @@ C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange.
 C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange.genruntimeconfig.cache
 C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
 C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange_MarkupCompile.lref
+E:\Experion\Projects\Healthcare R&D\MapScience\Jithu\FileExtension\bin\Debug\netcoreapp3.1\MVVMFileMange.exe
+E:\Experion\Projects\Healthcare R&D\MapScience\Jithu\FileExtension\bin\Debug\netcoreapp3.1\MVVMFileMange.deps.json
+E:\Experion\Projects\Healthcare R&D\MapScience\Jithu\FileExtension\bin\Debug\netcoreapp3.1\MVVMFileMange.runtimeconfig.json
+E:\Experion\Projects\Healthcare R&D\MapScience\Jithu\FileExtension\bin\Debug\netcoreapp3.1\MVVMFileMange.runtimeconfig.dev.json
+E:\Experion\Projects\Healthcare R&D\MapScience\Jithu\FileExtension\bin\Debug\netcoreapp3.1\MVVMFileMange.dll
+E:\Experion\Projects\Healthcare R&D\MapScience\Jithu\FileExtension\bin\Debug\netcoreapp3.1\MVVMFileMange.pdb
+E:\Experion\Projects\Healthcare R&D\MapScience\Jithu\FileExtension\obj\Debug\netcoreapp3.1\MVVMFileMange.csprojAssemblyReference.cache
+E:\Experion\Projects\Healthcare R&D\MapScience\Jithu\FileExtension\obj\Debug\netcoreapp3.1\View\FileSelect.g.cs
+E:\Experion\Projects\Healthcare R&D\MapScience\Jithu\FileExtension\obj\Debug\netcoreapp3.1\App.g.cs
+E:\Experion\Projects\Healthcare R&D\MapScience\Jithu\FileExtension\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
+E:\Experion\Projects\Healthcare R&D\MapScience\Jithu\FileExtension\obj\Debug\netcoreapp3.1\MVVMFileMange_MarkupCompile.cache
+E:\Experion\Projects\Healthcare R&D\MapScience\Jithu\FileExtension\obj\Debug\netcoreapp3.1\MVVMFileMange_MarkupCompile.lref
+E:\Experion\Projects\Healthcare R&D\MapScience\Jithu\FileExtension\obj\Debug\netcoreapp3.1\View\FileSelect.baml
+E:\Experion\Projects\Healthcare R&D\MapScience\Jithu\FileExtension\obj\Debug\netcoreapp3.1\MVVMFileMange.g.resources
+E:\Experion\Projects\Healthcare R&D\MapScience\Jithu\FileExtension\obj\Debug\netcoreapp3.1\MVVMFileMange.AssemblyInfoInputs.cache
+E:\Experion\Projects\Healthcare R&D\MapScience\Jithu\FileExtension\obj\Debug\netcoreapp3.1\MVVMFileMange.AssemblyInfo.cs
+E:\Experion\Projects\Healthcare R&D\MapScience\Jithu\FileExtension\obj\Debug\netcoreapp3.1\MVVMFileMange.csproj.CoreCompileInputs.cache
+E:\Experion\Projects\Healthcare R&D\MapScience\Jithu\FileExtension\obj\Debug\netcoreapp3.1\MVVMFileMange.dll
+E:\Experion\Projects\Healthcare R&D\MapScience\Jithu\FileExtension\obj\Debug\netcoreapp3.1\MVVMFileMange.pdb
+E:\Experion\Projects\Healthcare R&D\MapScience\Jithu\FileExtension\obj\Debug\netcoreapp3.1\MVVMFileMange.genruntimeconfig.cache
