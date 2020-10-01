@@ -12,6 +12,8 @@ using MVVMFileMange.Command;
 using System.ComponentModel;
 using System.IO;
 
+using iTextSharp.text.pdf;
+
 namespace MVVM.ViewModel
 {
     public class FileSelectViewModel
@@ -32,10 +34,12 @@ namespace MVVM.ViewModel
 
         public ICommand OpenFileBtnClick { get; set; }
         public ICommand SaveAsTextBtn { get; set; }
+        public ICommand SaveAsPDFBtn { get; set; }
         public FileSelectViewModel()
         {
             OpenFileBtnClick = new RelayCommand(OpenFileBtnClickExecute, OpenFileBtnClickCanExecute);
             SaveAsTextBtn = new RelayCommand(SaveAsTextBtnExecute, SaveAsTextBtnCanExecute);
+            SaveAsPDFBtn = new RelayCommand(SaveAsPDFBtnExecute, SaveAsPDFBtnCanExecute);
             _FileDetails = new Files();
         }
         public bool OpenFileBtnClickCanExecute(object param)
@@ -80,14 +84,14 @@ namespace MVVM.ViewModel
 
         public void SaveAsTextBtnExecute(object param)
         {
-            string FileExtFilter = ConfigurationManager.AppSettings.Get("SupportingFileTxtFilter");          
+            string FileExtFilter = ConfigurationManager.AppSettings.Get("SupportingFileTxtFilter");
             try
             {
                 SaveFileDialog SaveFileDialog = new SaveFileDialog();
-                SaveFileDialog.Filter = FileExtFilter;            
-                if (SaveFileDialog.ShowDialog() == true&&  FilesDetails.SelectedFileContent.Length > 0)
-                File.WriteAllText(SaveFileDialog.FileName, FilesDetails.SelectedFileContent);
-                MessageBox.Show("Text file created.");
+                SaveFileDialog.Filter = FileExtFilter;
+                if (SaveFileDialog.ShowDialog() == true && FilesDetails.SelectedFileContent.Length > 0)
+                    File.WriteAllText(SaveFileDialog.FileName, FilesDetails.SelectedFileContent);
+                MessageBox.Show("Text File Saved Succesfully");
             }
             catch (System.Exception)
             {
@@ -95,5 +99,34 @@ namespace MVVM.ViewModel
             }
         }
 
+        public bool SaveAsPDFBtnCanExecute(object param)
+        {
+            return true;
+        }
+
+        public void SaveAsPDFBtnExecute(object param)
+        {
+
+            SaveFileDialog ConvertToPdf = new SaveFileDialog();
+            string FileExtFilter = ConfigurationManager.AppSettings.Get("SupportingFilePDFFilter");
+            ConvertToPdf.Filter = FileExtFilter;
+            try
+            {
+                if (ConvertToPdf.ShowDialog() == true && FilesDetails.SelectedFileContent.Length > 0)
+                {
+                    iTextSharp.text.Document doc = new iTextSharp.text.Document();
+                    PdfWriter.GetInstance(doc, new FileStream(ConvertToPdf.FileName, FileMode.Create));
+                    doc.Open();
+                    doc.Add(new iTextSharp.text.Paragraph(FilesDetails.SelectedFileContent));
+                    doc.Close();
+                    FilesDetails.SelectedFileContent = "";
+                    MessageBox.Show("PDF Saved Succesfully", "PDF File");
+                }
+            }
+            catch (System.Exception)
+            {
+                MessageBox.Show("Invalid File error", "PDF File");
+            }
+        }
     }
 }

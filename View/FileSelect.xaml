@@ -26,7 +26,8 @@
      Name="ToTextFile"  Command="{Binding SaveAsTextBtn}"/>
 
 
-    <Button x:Name="button" Content="Save as PDf" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Margin="20,20,25,0"/>
+    <Button  Content="Save as PDf" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Margin="20,20,25,0"
+     Command="{Binding SaveAsPDFBtn}"/>
     <Grid Grid.Row="2">
         <ScrollViewer>
             <TextBlock 
