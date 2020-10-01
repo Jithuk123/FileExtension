@@ -1,8 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Command"
+    "\\bin",
+    "\\Command",
+    "\\Model",
+    "\\View",
+    "\\ViewModel"
   ],
-  "SelectedNode": "\\Command\\Relaycommand.cs",
+  "SelectedNode": "\\bin\\App.config",
   "PreviewInSolutionExplorer": false
 }

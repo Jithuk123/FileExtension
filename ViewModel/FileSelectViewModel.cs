@@ -16,7 +16,7 @@ namespace MVVM.ViewModel
     public class FileSelectViewModel
     {
        
-        public ICommand relayCommand { get; set; }
+       
         public Files FilesDetails { 
             get
             {
@@ -29,17 +29,17 @@ namespace MVVM.ViewModel
             }}
 
             private Files _FileDetails;
-       
+        public ICommand OpenFileBtnClick { get; set; }
         public FileSelectViewModel()
         {
-            relayCommand = new RelayCommand(Execute,CanExecute);
+            OpenFileBtnClick = new RelayCommand(OpenFileBtnClickExecute,OpenFileBtnClickCanExecute);
             _FileDetails=new Files();
         }
-        public bool CanExecute(object param)
+        public bool OpenFileBtnClickCanExecute(object param)
         {
             return true;
         }
-        public void Execute(object param)
+        public void OpenFileBtnClickExecute(object param)
         {
     
             //     var supportFileFormat = ConfigurationManager.AppSettings["fileFormat"];
