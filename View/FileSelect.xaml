@@ -12,6 +12,7 @@
         <RowDefinition Height="100"/>
         <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
+   
     <TextBlock Text="ExFile Manager Application" HorizontalAlignment="Center" Margin="20,5,20,0"/>
     <TextBox HorizontalAlignment="Center" Height="40" Margin="30,35,0,0" TextWrapping="Wrap" 
           Text="{Binding FilesDetails.SelectedFileName }"
@@ -19,15 +20,21 @@
 
     <Button x:Name="BrowseButton" Content="Browse a file" HorizontalAlignment="Right"  Margin="485,35,10,0" 
     VerticalAlignment="Top" Width="121" Height="40"   Command="{Binding OpenFileBtnClick}"/>
-   
+
+    
+   <Button  Content="Save as Text" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Margin="20,20,125,0"
+     Name="ToTextFile"  Command="{Binding SaveAsTextBtn}"/>
+
+
+    <Button x:Name="button" Content="Save as PDf" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Margin="20,20,25,0"/>
     <Grid Grid.Row="2">
         <ScrollViewer>
             <TextBlock 
-                       HorizontalAlignment="Left" Margin="30,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Name="fileContent"
-                    Text="{Binding FilesDetails.SelectedFileContent}"
-                    /> 
+                       HorizontalAlignment="Left" Margin="30,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  x:Name="fileContent"
+                    Text="{Binding FilesDetails.SelectedFileContent}"/>                 
         </ScrollViewer>
     </Grid>
+     
         
 </Grid>
 </Window>

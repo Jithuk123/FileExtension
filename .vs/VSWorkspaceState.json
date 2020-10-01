@@ -1,12 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\bin",
     "\\Command",
     "\\Model",
     "\\View",
     "\\ViewModel"
   ],
-  "SelectedNode": "\\bin\\App.config",
+  "SelectedNode": "\\ViewModel\\FileSelectViewModel.cs",
   "PreviewInSolutionExplorer": false
 }

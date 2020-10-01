@@ -10,6 +10,7 @@ using Microsoft.Win32;
 using System.Configuration;
 using MVVMFileMange.Command;
 using System.ComponentModel;
+using System.IO;
 
 namespace MVVM.ViewModel
 {
@@ -26,15 +27,15 @@ namespace MVVM.ViewModel
             set
             {
                 _FileDetails = value;
-
             }
         }
 
-
         public ICommand OpenFileBtnClick { get; set; }
+        public ICommand SaveAsTextBtn { get; set; }
         public FileSelectViewModel()
         {
             OpenFileBtnClick = new RelayCommand(OpenFileBtnClickExecute, OpenFileBtnClickCanExecute);
+            SaveAsTextBtn = new RelayCommand(SaveAsTextBtnExecute, SaveAsTextBtnCanExecute);
             _FileDetails = new Files();
         }
         public bool OpenFileBtnClickCanExecute(object param)
@@ -43,14 +44,14 @@ namespace MVVM.ViewModel
         }
         public void OpenFileBtnClickExecute(object param)
         {
+            string FileExtType = ConfigurationManager.AppSettings.Get("SupportingFileType");
+            string FileExtFilter = ConfigurationManager.AppSettings.Get("SupportingFileTxtFilter");
 
-            //     var supportFileFormat = ConfigurationManager.AppSettings["fileFormat"];
-            //   Console.WriteLine(supportFileFormat); 
             OpenFileDialog openFileDlg = new OpenFileDialog();
             // Set filter for file extension and default file extension  
-            openFileDlg.DefaultExt = ".txt";
-            openFileDlg.Filter = "Text documents (.txt)|*.txt";
-            //  openFileDlg.DefaultExt = supportFileFormat;
+            openFileDlg.DefaultExt = FileExtType;
+            openFileDlg.Filter = FileExtFilter;
+
 
             // Launch OpenFileDialog by calling ShowDialog method
             //specifies whether the activity was accepted (true) or canceled (false).
@@ -72,5 +73,27 @@ namespace MVVM.ViewModel
                 MessageBox.Show("A handled exception just occurred");
             }
         }
+        public bool SaveAsTextBtnCanExecute(object param)
+        {
+            return true;
+        }
+
+        public void SaveAsTextBtnExecute(object param)
+        {
+            string FileExtFilter = ConfigurationManager.AppSettings.Get("SupportingFileTxtFilter");          
+            try
+            {
+                SaveFileDialog SaveFileDialog = new SaveFileDialog();
+                SaveFileDialog.Filter = FileExtFilter;            
+                if (SaveFileDialog.ShowDialog() == true&&  FilesDetails.SelectedFileContent.Length > 0)
+                File.WriteAllText(SaveFileDialog.FileName, FilesDetails.SelectedFileContent);
+                MessageBox.Show("Text file created.");
+            }
+            catch (System.Exception)
+            {
+                MessageBox.Show("Invalid File error");
+            }
+        }
+
     }
 }

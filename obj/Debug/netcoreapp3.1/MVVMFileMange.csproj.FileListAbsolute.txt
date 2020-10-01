@@ -17,3 +17,4 @@ C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange.
 C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange.pdb
 C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange.genruntimeconfig.cache
 C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange_MarkupCompile.lref
+C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\MVVMFileMange.dll.config
