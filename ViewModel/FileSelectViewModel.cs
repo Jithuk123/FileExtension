@@ -15,9 +15,10 @@ namespace MVVM.ViewModel
 {
     public class FileSelectViewModel
     {
-       
-       
-        public Files FilesDetails { 
+        private Files _FileDetails;
+
+        public Files FilesDetails
+        {
             get
             {
                 return _FileDetails;
@@ -25,15 +26,16 @@ namespace MVVM.ViewModel
             set
             {
                 _FileDetails = value;
-                
-            }}
 
-            private Files _FileDetails;
+            }
+        }
+
+
         public ICommand OpenFileBtnClick { get; set; }
         public FileSelectViewModel()
         {
-            OpenFileBtnClick = new RelayCommand(OpenFileBtnClickExecute,OpenFileBtnClickCanExecute);
-            _FileDetails=new Files();
+            OpenFileBtnClick = new RelayCommand(OpenFileBtnClickExecute, OpenFileBtnClickCanExecute);
+            _FileDetails = new Files();
         }
         public bool OpenFileBtnClickCanExecute(object param)
         {
@@ -41,7 +43,7 @@ namespace MVVM.ViewModel
         }
         public void OpenFileBtnClickExecute(object param)
         {
-    
+
             //     var supportFileFormat = ConfigurationManager.AppSettings["fileFormat"];
             //   Console.WriteLine(supportFileFormat); 
             OpenFileDialog openFileDlg = new OpenFileDialog();
@@ -60,12 +62,9 @@ namespace MVVM.ViewModel
                 // Load content of file in a TextBlock
                 if (result == true)
                 {
-                    FilesDetails.selectedFileName = openFileDlg.FileName;
-                    FilesDetails.selectedFileContent = System.IO.File.ReadAllText(openFileDlg.FileName);
-
-                  
+                    FilesDetails.SelectedFileName = openFileDlg.FileName;
+                    FilesDetails.SelectedFileContent = System.IO.File.ReadAllText(openFileDlg.FileName);
                 }
-                
             }
             catch (System.Exception)
             {
@@ -75,8 +74,3 @@ namespace MVVM.ViewModel
         }
     }
 }
-    
-
-
-
-
