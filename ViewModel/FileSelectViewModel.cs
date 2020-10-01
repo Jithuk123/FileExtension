@@ -58,7 +58,7 @@ namespace MVVM.ViewModel
             try
             {
                 Nullable<bool> result = openFileDlg.ShowDialog();
-                // Get the selected file name and display in a TextBox.
+                // Get the selecteds file name and display in a TextBox.
                 // Load content of file in a TextBlock
                 if (result == true)
                 {
