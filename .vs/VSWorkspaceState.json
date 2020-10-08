@@ -6,6 +6,6 @@
     "\\View",
     "\\ViewModel"
   ],
-  "SelectedNode": "\\ViewModel\\FileSelectViewModel.cs",
+  "SelectedNode": "\\View\\FileSelect.xaml.cs",
   "PreviewInSolutionExplorer": false
 }

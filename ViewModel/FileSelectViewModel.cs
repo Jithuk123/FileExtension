@@ -11,8 +11,9 @@ using System.Configuration;
 using MVVMFileMange.Command;
 using System.ComponentModel;
 using System.IO;
-
 using iTextSharp.text.pdf;
+using System.Net;
+
 
 namespace MVVM.ViewModel
 {
@@ -35,11 +36,14 @@ namespace MVVM.ViewModel
         public ICommand OpenFileBtnClick { get; set; }
         public ICommand SaveAsTextBtn { get; set; }
         public ICommand SaveAsPDFBtn { get; set; }
+
+        public ICommand UploadBtn { get; set; }
         public FileSelectViewModel()
         {
             OpenFileBtnClick = new RelayCommand(OpenFileBtnClickExecute, OpenFileBtnClickCanExecute);
             SaveAsTextBtn = new RelayCommand(SaveAsTextBtnExecute, SaveAsTextBtnCanExecute);
             SaveAsPDFBtn = new RelayCommand(SaveAsPDFBtnExecute, SaveAsPDFBtnCanExecute);
+            UploadBtn = new RelayCommand(UploadBtnExecute, UploadBtnCanExecute);
             _FileDetails = new Files();
         }
         public bool OpenFileBtnClickCanExecute(object param)
@@ -91,7 +95,12 @@ namespace MVVM.ViewModel
                 SaveFileDialog.Filter = FileExtFilter;
                 if (SaveFileDialog.ShowDialog() == true && FilesDetails.SelectedFileContent.Length > 0)
                     File.WriteAllText(SaveFileDialog.FileName, FilesDetails.SelectedFileContent);
-                MessageBox.Show("Text File Saved Succesfully");
+                if (SaveFileDialog.FileName.Length > 0)
+                {
+                    FilesDetails.SelectedFileContent = "";
+                    MessageBox.Show("Text File Saved Succesfully");
+                }
+
             }
             catch (System.Exception)
             {
@@ -128,5 +137,49 @@ namespace MVVM.ViewModel
                 MessageBox.Show("Invalid File error", "PDF File");
             }
         }
+
+        public bool UploadBtnCanExecute(object param)
+        {
+            return true;
+        }
+
+        public void UploadBtnExecute(object param)
+        {
+
+
+            string HostAddress = ConfigurationManager.AppSettings.Get("HostAddress");
+            string UserId = ConfigurationManager.AppSettings.Get("UserId");
+            string Password = ConfigurationManager.AppSettings.Get("Password");
+            // ConvertToPdf.Filter = FileExtFilter;
+            try
+            {
+                string fileNameOnly = Path.GetFileName(FilesDetails.SelectedFileName);
+                //  Console.WriteLine("file name, {0}", result);
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(HostAddress + @"/" + fileNameOnly);
+                request.Method = WebRequestMethods.Ftp.UploadFile;
+
+                request.Credentials = new NetworkCredential(UserId, Password);
+                // Copy the contents of the file to the request stream.
+
+                StreamReader sourceStream = new StreamReader(@FilesDetails.SelectedFileName);
+                byte[] fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
+                sourceStream.Close();
+                request.ContentLength = fileContents.Length;
+                Stream requestStream = request.GetRequestStream();
+                requestStream.Write(fileContents, 0, fileContents.Length);
+                requestStream.Close();
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                FilesDetails.SelectedFileContent = "";
+                Console.WriteLine("Upload File Complete, status {0}", response.StatusDescription);
+                MessageBox.Show("File Uploaded!", " File");
+
+                response.Close();
+            }
+            catch (System.Exception)
+            {
+                MessageBox.Show("Invalid File error", "PDF File");
+            }
+        }
+
     }
 }
