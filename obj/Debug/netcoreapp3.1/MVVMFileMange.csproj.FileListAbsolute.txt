@@ -20,8 +20,4 @@ C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange_
 C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\MVVMFileMange.dll.config
 C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
 C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\itextsharp.dll
-C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\PdfSharp.Charting.dll
-C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\PdfSharp.dll
-C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\de\PdfSharp.Charting.resources.dll
-C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\de\PdfSharp.resources.dll
 C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange.csproj.CopyComplete
