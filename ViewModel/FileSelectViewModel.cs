@@ -57,39 +57,7 @@ namespace MVVM.ViewModel
         {
             return true;
         }
-        // public void OpenFileBtnClickExecute(object param)
-        // {
-
-        //     //  FilesDetails.Btn_Update_Visibility.Visibility=  Visibility.Hidden;
-        //     string FileExtType = ConfigurationManager.AppSettings.Get("SupportingFileType");
-        //     string FileExtFilter = ConfigurationManager.AppSettings.Get("SupportingFileTxtFilter");
-
-        //     OpenFileDialog openFileDlg = new OpenFileDialog();
-        //     // Set filter for file extension and default file extension  
-        //     openFileDlg.DefaultExt = FileExtType;
-        //     openFileDlg.Filter = FileExtFilter;
-
-
-        //     // Launch OpenFileDialog by calling ShowDialog method
-        //     //specifies whether the activity was accepted (true) or canceled (false).
-        //     //ShowDialog() is called on a window that is closing (Closing) or has been closed (Closed).
-        //     try
-        //     {
-        //         Nullable<bool> result = openFileDlg.ShowDialog();
-        //         // Get the selecteds file name and display in a TextBox.
-        //         // Load content of file in a TextBlock
-        //         if (result == true)
-        //         {
-        //             FilesDetails.SelectedFileName = openFileDlg.FileName;
-        //             FilesDetails.SelectedFileContent = System.IO.File.ReadAllText(openFileDlg.FileName);
-        //         }
-        //     }
-        //     catch (System.Exception)
-        //     {
-
-        //         MessageBox.Show("A handled exception just occurred");
-        //     }
-        // }
+  
         public bool SaveAsTextBtnCanExecute(object param)
         {
             return true;
@@ -150,45 +118,7 @@ namespace MVVM.ViewModel
             return true;
         }
 
-        // public void UploadBtnExecute(object param)
-        // {
-
-
-        //     string HostAddress = ConfigurationManager.AppSettings.Get("HostAddress");
-        //     string UserId = ConfigurationManager.AppSettings.Get("UserId");
-        //     string Password = ConfigurationManager.AppSettings.Get("Password");
-        //     // ConvertToPdf.Filter = FileExtFilter;
-        //     try
-        //     {
-        //         string fileNameOnly = Path.GetFileName(FilesDetails.SelectedFileName);
-        //         //  Console.WriteLine("file name, {0}", result);
-        //         FtpWebRequest request = (FtpWebRequest)WebRequest.Create(HostAddress + @"/" + fileNameOnly);
-        //         request.Method = WebRequestMethods.Ftp.UploadFile;
-
-        //         request.Credentials = new NetworkCredential(UserId, Password);
-        //         // Copy the contents of the file to the request stream.
-
-        //         StreamReader sourceStream = new StreamReader(@FilesDetails.SelectedFileName);
-        //         byte[] fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
-        //         sourceStream.Close();
-        //         request.ContentLength = fileContents.Length;
-        //         Stream requestStream = request.GetRequestStream();
-        //         requestStream.Write(fileContents, 0, fileContents.Length);
-        //         requestStream.Close();
-        //         FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-        //         FilesDetails.SelectedFileContent = "";
-        //         Console.WriteLine("Upload File Complete, status {0}", response.StatusDescription);
-        //         MessageBox.Show("File Uploaded!", " File");
-
-        //         response.Close();
-        //     }
-        //     catch (System.Exception)
-        //     {
-        //         MessageBox.Show("Your internet connection appears to be down or URL not found. Please check it and try again",
-        //                  "Communications Error", MessageBoxButton.OK, MessageBoxImage.Information);
-        //     }
-        // }
-
+      
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
