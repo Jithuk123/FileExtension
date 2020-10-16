@@ -1,0 +1,57 @@
+			         Mapscience                                   
+
+The demo application is created in .net core WPF application following the MVVM design pattern
+The following functionalities  were implemented in the application :-
+⦁	The text file has been uploaded and displayed in the application.
+⦁	The displayed content is saved in text and PDF format.
+⦁	ITextSharp used to convert uploaded text file to PDF format(ITextsharp is an advanced tool library which is used for creating complex pdf repors.)
+                https://www.nuget.org/packages/iTextSharp/
+⦁	FtpWebRequest Class is used to upload and download information from an FTP server.
+ https://docs.microsoft.com/en-us/dotnet/api/system.net.ftpwebrequest?view=netcore-3.1#:~:text=Begins%20sending%20a%20request%20and,from%20an%20FTP%20server%20asynchronously.&text=Creates%20an%20object%20that%20contains,communicate%20with%20a%20remote%20object.
+
+⦁	Implemented Cryptlex  license management software to the application
+          https://cryptlex.com/
+
+ Welcome to Cryptlex!
+LexActivator is the Cryptlex client library which you will use to add licensing to your product. Using this library you can easily validate the license key in your software app.
+
+Perpetual licensing model
+It refers to licenses which have lifetime validity. A user buys a license and can use your product for lifetime without any need of paying again.
+
+Leasing strategy
+This option is valid for on-premise-floating and hosted-floating license types only. It allows for following strategies:
+Per-Machine: 
+Each machine will only consume a single floating license/activation, irrespective of the number of instances (processes) of your app being run on the machine.
+Per-Instance: 
+Each instance (process) of your app will consume a separate floating license/activation, irrespective of whether the instances are running on the same machine or different machines
+
+expering :--The license starts expiring after the license is activated first time. If the license allows more than one activation then all the other activations will also start expiring right after the first activation of the license.
+
+How to create a license?
+Step 1 :Creating a license policy
+
+A license policy acts as a template (blueprint) for the licenses you create for your customers. 
+set name,Allowed Activation , License type ect.
+Allowed Activation  =1 ,means each user have different License key.                 (E.g. If your customer wants to buy license for two pc's then instead of creating two keys you can create a single key and allow two activations. [Then "Allowed Activation =2"])
+
+Step 2 :Add a product
+Add name description and default policy type
+
+Step 3 : Create licenses
+⦁	Add product name
+⦁	Total number of licenses:max 100.(if this value is 10 ,10 different license keys will genarate)
+⦁	Add poilicy ,type ,validity and all
+....................................................................................................................................
+
+/*
+A license activation only requires a license key.
+⦁	 In case you want to enforce user authentication for license activation, you can linking the user to the license at the time of license creation.
+⦁	You can allow an unlimited number of seats for a license (site license), and restrict the site using IP address or location.       
+⦁	They can use single key (with one activation) for all the accounts, but if you want to prevent that you can enable user lock in the license. This way they will need a separate key (or activation) for each account on the same machine.   */
+
+pons 
+⦁	Customer suppoet is very weak.They have only one chat agent and does not provide 24 hours service(only 10 AM to 7 PM)
+⦁	All the hardware parts which are fingerprinted for identify the devices.
+
+
+

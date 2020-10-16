@@ -21,3 +21,12 @@ C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\MVVMFileMange.
 C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
 C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\itextsharp.dll
 C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange.csproj.CopyComplete
+C:\Users\jithu.jose\Desktop\MVVMFileMange\obj\Debug\netcoreapp3.1\MVVMFileMange_Content.g.cs
+C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\LexActivator.dll
+C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\LexActivator32.dll
+C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\Cryptlex.LexActivator.dll
+C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\runtimes\linux-musl-x64\native\libLexActivator.so
+C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\libLexActivator.so
+C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\runtimes\osx-x64\native\libLexActivator.dylib
+C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\LexActivator.dll
+C:\Users\jithu.jose\Desktop\MVVMFileMange\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\LexActivator32.dll
