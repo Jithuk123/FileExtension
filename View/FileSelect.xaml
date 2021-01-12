@@ -71,7 +71,7 @@
         <Label  HorizontalAlignment="Left" Margin="293,43,0,0" VerticalAlignment="Top"   Content="{Binding FilesDetails.progressBar1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   Height="32" 
                Foreground="Black" FontSize="14" FontWeight="Normal" Grid.Row="1" /> -->
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2"> 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="165*"/>
                 <ColumnDefinition Width="498*"/>

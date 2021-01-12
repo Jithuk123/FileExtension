@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace MVVM.Model
@@ -5,11 +6,13 @@ namespace MVVM.Model
     public class Files : INotifyPropertyChanged
     {
         private string _fName;
+        private List<string> _fNames;
         private  string _fContent;
         
         private  double _ProgressBar;
         private string _lblStatus;
-        
+
+       
         //Define an event based on delegates
         public event PropertyChangedEventHandler PropertyChanged;
         //Raise the event
@@ -34,6 +37,20 @@ namespace MVVM.Model
                 OnPropertyChanged("SelectedFileName");
             }
         }
+        
+        public List<string> SelectedFiles
+        {
+            get
+            {  
+                return _fNames;
+            }
+            set
+            {
+                _fNames = value;
+                OnPropertyChanged("SelectedFiles");
+            }
+        }
+
         public string SelectedFileContent
         {
             get

@@ -1,8 +1,6 @@
-using System;
+using System; 
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using MVVM.Model;
@@ -14,18 +12,23 @@ using System.IO;
 using iTextSharp.text.pdf;
 using System.Net;
 using System.ComponentModel;
-using System.Xml.Linq;
-using System.Xml;
+using System.Data;
+using MVVMFileMange.View;
 
 namespace MVVM.ViewModel
 {
 
     public class FileSelectViewModel
     {
-        
+
+
         private BackgroundWorker worker = null;//
         double filesizedownloaded = 0, filesize = 0;//
         private Files _FileDetails;
+
+
+
+
 
         public Files FilesDetails
         {
@@ -39,6 +42,7 @@ namespace MVVM.ViewModel
             }
         }
 
+
         public ICommand OpenFileBtnClick { get; set; }
         public ICommand SaveAsTextBtn { get; set; }
         public ICommand SaveAsPDFBtn { get; set; }
@@ -49,15 +53,60 @@ namespace MVVM.ViewModel
             OpenFileBtnClick = new RelayCommand(OpenFileBtnClickExecute, OpenFileBtnClickCanExecute);
             SaveAsTextBtn = new RelayCommand(SaveAsTextBtnExecute, SaveAsTextBtnCanExecute);
             SaveAsPDFBtn = new RelayCommand(SaveAsPDFBtnExecute, SaveAsPDFBtnCanExecute);
-            UploadBtn = new RelayCommand(UploadBtnExecute, UploadBtnCanExecute);
+            //UploadBtn = new RelayCommand(UploadBtnExecute, UploadBtnCanExecute);
             _FileDetails = new Files();
+        }
+
+
+        //private DataRowView _dr;
+        //public DataRowView dr
+        //{
+        //    get
+        //    {
+        //        return _dr;
+        //    }
+
+        //    set
+        //    {
+        //        _dr = value;
+        //        OnPropertyChanged("dr");
+
+        //        this.DetailView = new SourceFolder(value); //On Change of the selected Row create a new viewModel which serves as detail view
+        //    }
+        //}
+
+        private void OnPropertyChanged(string v)
+        {
+            throw new NotImplementedException();
+        }
+
+        private SourceFolder _DetailView;
+        public SourceFolder DetailView
+        {
+            get
+            {
+                return _DetailView;
+            }
+            set
+            {
+                if (_DetailView != value)
+                {
+                    _DetailView = value;
+                    RaisePropertyChanged(() => this.DetailView);
+                }
+            }
+        }
+
+        private void RaisePropertyChanged(Func<SourceFolder> p)
+        {
+            throw new NotImplementedException();
         }
 
         public bool OpenFileBtnClickCanExecute(object param)
         {
             return true;
         }
-  
+
         public bool SaveAsTextBtnCanExecute(object param)
         {
             return true;
@@ -113,12 +162,12 @@ namespace MVVM.ViewModel
             }
         }
 
-        public bool UploadBtnCanExecute(object param)
-        {
-            return true;
-        }
+        //public bool UploadBtnCanExecute(object param)
+        //{
+        //    return true;
+        //}
 
-      
+
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -126,148 +175,223 @@ namespace MVVM.ViewModel
             worker = null;
         }
 
-        public void UploadBtnExecute(object param)
-        {
-           
-            FilesDetails.progressBar1 = 100;
-            if (worker == null)
-            {
-                worker = new BackgroundWorker();
-                //Adding method to the invocation list of an existing delegate instance.
-                worker.DoWork += worker_DoWork;
-                worker.RunWorkerCompleted += worker_RunWorkerCompleted;
-                worker.ProgressChanged += worker_ProgressChanged;
-                worker.WorkerReportsProgress = true;
-                worker.WorkerSupportsCancellation = true;
+        //public void UploadBtnExecute(object param)
+        //{ 
 
-            }
-            if (worker.IsBusy != true)
-            {
-                // Start the asynchronous operation.
-                worker.RunWorkerAsync();
-            }
-        }
+        //    FilesDetails.progressBar1 = 100;
+        //    if (worker == null)
+        //    {
+        //        worker = new BackgroundWorker();
+        //        //Adding method to the invocation list of an existing delegate instance. 
+        //        worker.DoWork += worker_DoWork;
+        //        worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+        //        worker.ProgressChanged += worker_ProgressChanged;
+        //        worker.WorkerReportsProgress = true;
+        //        worker.WorkerSupportsCancellation = true;
+
+        //    }
+        //    if (worker.IsBusy != true)
+        //    {
+        //        // Start the asynchronous operation.
+        //        worker.RunWorkerAsync();
+        //    }
+        //}
         static double ConvertBytesToMegabytes(long bytes)
         {
             //convert bytes to  GB
             return (bytes / 1024f) / 1024f;
         }
 
-        private void worker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            string HostAddress = ConfigurationManager.AppSettings.Get("HostAddress");
-            string UserId = ConfigurationManager.AppSettings.Get("UserId");
-            string Password = ConfigurationManager.AppSettings.Get("Password");
-            try
-            {
-                string fileNameOnly = Path.GetFileName(FilesDetails.SelectedFileName);
-                //  Console.WriteLine("file name, {0}", result);
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(HostAddress + @"/" + fileNameOnly);
-                request.Method = WebRequestMethods.Ftp.UploadFile;
+        //private void worker_DoWork(object sender, DoWorkEventArgs e)
+        //{
+        //    string HostAddress = ConfigurationManager.AppSettings.Get("HostAddress");
+        //    string UserId = ConfigurationManager.AppSettings.Get("UserId");
+        //    string Password = ConfigurationManager.AppSettings.Get("Password");
+        //    try
+        //    {
+        //        string fileNameOnly = Path.GetFileName(FilesDetails.SelectedFileName);
+        //        //  Console.WriteLine("file name, {0}", result);
+        //        FtpWebRequest request = (FtpWebRequest)WebRequest.Create(HostAddress + @"/" + fileNameOnly);
+        //        request.Method = WebRequestMethods.Ftp.UploadFile;
 
-                request.Credentials = new NetworkCredential(UserId, Password);
-                // Copy the contents of the file to the request stream.
+        //        request.Credentials = new NetworkCredential(UserId, Password);
+        //        // Copy the contents of the file to the request stream.
 
-                StreamReader sourceStream = new StreamReader(@FilesDetails.SelectedFileName);
-                byte[] fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
-                sourceStream.Close();
-                request.ContentLength = fileContents.Length;
-                filesize = ConvertBytesToMegabytes(request.ContentLength);
-                Console.WriteLine("hello,{0}", filesize);
-                // Console.WriteLine("hellosss,{0}", request.ContentLength);
-                Stream requestStream = request.GetRequestStream();
-                Console.WriteLine("here,{0}", requestStream);
-
-
-
-                requestStream.Write(fileContents, 0, fileContents.Length);
-                filesizedownloaded = ConvertBytesToMegabytes(requestStream.Length);
-                Console.WriteLine("hellosss,{0}", filesizedownloaded);
-                worker.ReportProgress(Convert.ToInt32((Convert.ToInt32(filesizedownloaded) / filesize) * 100));
-
-                requestStream.Close();
-                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-                FilesDetails.SelectedFileContent = "";
-                Console.WriteLine("Upload File Complete, status {0}", response.StatusDescription);
-                MessageBox.Show("File Uploaded!", " File");
-                response.Close();
-            }
-            catch
-            {
-                MessageBox.Show("Your internet connection appears to be down or URL not found. Please check it and try again",
-                    "Communications Error", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-        }
-        void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-
-            FilesDetails.progressBar1 = e.ProgressPercentage;
-            Console.WriteLine("here,{0}", FilesDetails.progressBar1);
-
-            if ((FilesDetails.progressBar1 / 2) == 0)
-            {
-                FilesDetails.lblStatus = "Downloading.";
-            }
-            else if ((FilesDetails.progressBar1 / 3) == 0)
-            {
-                FilesDetails.lblStatus = "Downloading..";
-            }
-            else if ((FilesDetails.progressBar1 / 5) == 0)
-            {
-                FilesDetails.lblStatus = "Downloading...";
-            }
-
-            FilesDetails.lblStatus = "Download " + filesizedownloaded.ToString("F2") + " / " + filesize.ToString("F2")
-                + " ( " + FilesDetails.progressBar1.ToString() + " ) % Complete.";
-        }
+        //        StreamReader sourceStream = new StreamReader(@FilesDetails.SelectedFileName);
+        //        byte[] fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
+        //        sourceStream.Close();
+        //        request.ContentLength = fileContents.Length;
+        //        filesize = ConvertBytesToMegabytes(request.ContentLength);
+        //        Console.WriteLine("hello,{0}", filesize);
+        //        // Console.WriteLine("hellosss,{0}", request.ContentLength);
+        //        Stream requestStream = request.GetRequestStream();
+        //        Console.WriteLine("here,{0}", requestStream);
 
 
+
+        //        requestStream.Write(fileContents, 0, fileContents.Length);
+        //        filesizedownloaded = ConvertBytesToMegabytes(requestStream.Length);
+        //        Console.WriteLine("hellosss,{0}", filesizedownloaded);
+        //        worker.ReportProgress(Convert.ToInt32((Convert.ToInt32(filesizedownloaded) / filesize) * 100));
+
+        //        requestStream.Close();
+        //        FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+        //        FilesDetails.SelectedFileContent = "";
+        //        Console.WriteLine("Upload File Complete, status {0}", response.StatusDescription);
+        //        MessageBox.Show("File Uploaded!", " File");
+        //        response.Close();
+        //    }
+        //    catch
+        //    {
+        //        MessageBox.Show("Your internet connection appears to be down or URL not found. Please check it and try again",
+        //            "Communications Error", MessageBoxButton.OK, MessageBoxImage.Information);
+        //    }
+        //}
+
+
+        //void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        //{
+
+        //    FilesDetails.progressBar1 = e.ProgressPercentage;
+        //    Console.WriteLine("here,{0}", FilesDetails.progressBar1);
+
+        //    if ((FilesDetails.progressBar1 / 2) == 0)
+        //    {
+        //        FilesDetails.lblStatus = "Downloading.";
+        //    }
+        //    else if ((FilesDetails.progressBar1 / 3) == 0)
+        //    {
+        //        FilesDetails.lblStatus = "Downloading..";
+        //    }
+        //    else if ((FilesDetails.progressBar1 / 5) == 0)
+        //    {
+        //        FilesDetails.lblStatus = "Downloading...";
+        //    }
+
+        //    FilesDetails.lblStatus = "Download " + filesizedownloaded.ToString("F2") + " / " + filesize.ToString("F2")
+        //        + " ( " + FilesDetails.progressBar1.ToString() + " ) % Complete.";
+        //}
+
+  
 
         private void worker_DoWorks(object sender, DoWorkEventArgs e)
         {
+            var ode = new Files();
             string FileExtType = ConfigurationManager.AppSettings.Get("SupportingFileType");
             string FileExtFilter = ConfigurationManager.AppSettings.Get("SupportingFileTxtFilter");
 
             OpenFileDialog openFileDlg = new OpenFileDialog();
+
+            openFileDlg.Multiselect = true;
             // Set filter for file extension and default file extension  
             openFileDlg.DefaultExt = FileExtType;
             openFileDlg.Filter = FileExtFilter;
             // Launch OpenFileDialog by calling ShowDialog method
             //specifies whether the activity was accepted (true) or canceled (false).
             //ShowDialog() is called on a window that is closing (Closing) or has been closed (Closed).
+           
             try
             {
+
                 Nullable<bool> result = openFileDlg.ShowDialog();
+
                 // Get the selecteds file name and display in a TextBox.
+
                 // Load content of file in a TextBlock
-                if (result == true)
+                List<string> selectedFile = new List<string>();
+                if (result == true) 
                 {
-                    FilesDetails.SelectedFileName = openFileDlg.FileName;
-                    FilesDetails.SelectedFileContent = System.IO.File.ReadAllText(openFileDlg.FileName);
+                    foreach (string sltfiles in openFileDlg.FileNames)
+                    {
+                        selectedFile.Add(sltfiles);
+                        
+                    }
+                    FilesDetails.SelectedFiles = selectedFile;
+
+                    //Application.Current.Dispatcher.Invoke((Action)delegate
+                    {
+                        var test = new MVVMFileMange.View.SourceFolder(selectedFile);
+                        test.ShowDialog();
+                    };
+                    // should consider this while writing code 
+
+                    //FilesDetails.SelectedFileName = openFileDlg.FileName;
+                    //FilesDetails.SelectedFileContent = System.IO.File.ReadAllText(openFileDlg.FileName);
 
                 }
             }
-            catch
+            catch (Exception ex)
+
             {
-                MessageBox.Show("Your internet connection appears to be down or URL not found. Please check it and try again",
-                    "Communications Error", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                MessageBox.Show(ex.Message, MessageBoxButton.OK.ToString());
             }
         }
         public void OpenFileBtnClickExecute(object param)
         {
-            if (worker == null)
+            var ode = new Files();
+            string FileExtType = ConfigurationManager.AppSettings.Get("SupportingFileType");
+            string FileExtFilter = ConfigurationManager.AppSettings.Get("SupportingFileTxtFilter");
+
+            OpenFileDialog openFileDlg = new OpenFileDialog();
+
+            openFileDlg.Multiselect = true;
+            // Set filter for file extension and default file extension  
+            openFileDlg.DefaultExt = FileExtType;
+            openFileDlg.Filter = FileExtFilter;
+            // Launch OpenFileDialog by calling ShowDialog method
+            //specifies whether the activity was accepted (true) or canceled (false).
+            //ShowDialog() is called on a window that is closing (Closing) or has been closed (Closed).
+
+            try
             {
-                worker = new BackgroundWorker();
-                //Adding method to the invocation list of an existing delegate instance.
-                worker.DoWork += worker_DoWorks;
-                worker.RunWorkerCompleted += worker_RunWorkerCompleted;
-                worker.WorkerSupportsCancellation = true;
+
+                Nullable<bool> result = openFileDlg.ShowDialog();
+
+                // Get the selecteds file name and display in a TextBox.
+
+                // Load content of file in a TextBlock
+                List<string> selectedFile = new List<string>();
+                if (result == true)
+                {
+                    foreach (string sltfiles in openFileDlg.FileNames)
+                    {
+                        selectedFile.Add(sltfiles);
+
+                    }
+                    FilesDetails.SelectedFiles = selectedFile;
+
+                    
+                    {
+                        var test = new MVVMFileMange.View.SourceFolder(selectedFile);
+                        test.ShowDialog();
+                    };
+                    // should consider this while writing code 
+
+                    //FilesDetails.SelectedFileName = openFileDlg.FileName;
+                    //FilesDetails.SelectedFileContent = System.IO.File.ReadAllText(openFileDlg.FileName);
+
+                }
             }
-            if (worker.IsBusy != true)
+            catch (Exception ex)
+
             {
-                // Start the asynchronous operation.
-                worker.RunWorkerAsync();
+
+                MessageBox.Show(ex.Message, MessageBoxButton.OK.ToString());
             }
+            //if (worker == null)
+            //{
+            //    worker = new BackgroundWorker();
+            //    //Adding method to the invocation list of an existing delegate instance.
+            //    worker.DoWork += worker_DoWorks;
+            //    worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+            //    worker.WorkerSupportsCancellation = true;
+            //}
+            //if (worker.IsBusy != true)
+            //{
+            //    // Start the asynchronous operation.
+            //    worker.RunWorkerAsync();
+            //}
         }
     }
 }
