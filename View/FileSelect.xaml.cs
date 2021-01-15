@@ -7,7 +7,7 @@ namespace MVVM.View
 {
     /// <summary>
 
-    /// </summary>
+    /// </summary> 
     public partial class FileSelect : Window
     {
         public FileSelect()

@@ -1,11 +1,13 @@
 ﻿using MVVM.Model;
 using MVVMFileMange.Command;
+using Renci.SshNet;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Windows;
@@ -41,8 +43,11 @@ namespace MVVMFileMange.View
         public ICommand btnCloseClick { get; set; }
         public object Server { get; private set; }
         //List<string> selectedFiles = new List<string>();
+        private List<string> selectedFiles;
+        private List<string> failedFiles;
         public SourceFolder(List<string> selectedFiles)
         {
+
             InitializeComponent();
             hello(selectedFiles);
             FileManagement(selectedFiles);
@@ -50,8 +55,23 @@ namespace MVVMFileMange.View
             btnCloseClick = new RelayCommand(CloseBtnExecute, CloseBtnCanExecute);
             this.DataContext = this;
             //this.Row = row;
+            this.selectedFiles = selectedFiles;
+
+
 
         }
+
+        //private void UploadBtnClick(object sender, RoutedEventArgs e)
+
+        //{
+
+        //    string HostAddress = ConfigurationManager.AppSettings.Get("HostAddress");
+        //    string UserId = ConfigurationManager.AppSettings.Get("UserId");
+        //    string Password = ConfigurationManager.AppSettings.Get("Password");
+        //    string port = ConfigurationManager.AppSettings.Get("port");
+        //    var data = selectedFiles;
+
+        //}
 
         public bool UploadBtnCanExecute(object param)
         {
@@ -81,60 +101,84 @@ namespace MVVMFileMange.View
 
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
+            var todaysDate = DateTime.Now.ToString("dd-MM-yyyy");
+            string uploadFolderWithDate = @"C:\Users\jithu.jose\Desktop\Upload\" + todaysDate;
+            string inputFolderPath = @"C:\Users\jithu.jose\Desktop\input\" + todaysDate;
 
-            //List<string> selectedFiles = (List<string>)e.Argument;     
-            //MessageBox.Show(selectedFiles[1]);      
-
-            string HostAddress = ConfigurationManager.AppSettings.Get("HostAddress");
-            string UserId = ConfigurationManager.AppSettings.Get("UserId");
-            string Password = ConfigurationManager.AppSettings.Get("Password");
-            string port = ConfigurationManager.AppSettings.Get("port");
-            try
+            if (!Directory.Exists(uploadFolderWithDate))
             {
-                string fileNameOnly = Path.GetFileName("s");
-                //  Console.WriteLine("file name, {0}", result);
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(HostAddress + @"/" + fileNameOnly+":" +port);
-                request.Method = WebRequestMethods.Ftp.UploadFile;
-
-                request.Credentials = new NetworkCredential(UserId, Password);
-                // Copy the contents of the file to the request stream.
-
-                StreamReader sourceStream = new StreamReader(@FilesDetails.SelectedFileName);
-                byte[] fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
-                sourceStream.Close();
-                request.ContentLength = fileContents.Length;
-                filesize = ConvertBytesToMegabytes(request.ContentLength);
-                Console.WriteLine("hello,{0}", filesize);
-                // Console.WriteLine("hellosss,{0}", request.ContentLength);
-                Stream requestStream = request.GetRequestStream();
-                Console.WriteLine("here,{0}", requestStream); 
-
-
-
-                requestStream.Write(fileContents, 0, fileContents.Length);
-                filesizedownloaded = ConvertBytesToMegabytes(requestStream.Length);
-                Console.WriteLine("hellosss,{0}", filesizedownloaded);
-                worker.ReportProgress(Convert.ToInt32((Convert.ToInt32(filesizedownloaded) / filesize) * 100));
-
-                requestStream.Close();
-                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-                FilesDetails.SelectedFileContent = "";
-                Console.WriteLine("Upload File Complete, status {0}", response.StatusDescription);
-                MessageBox.Show("File Uploaded!", " File");
-                response.Close();
-            }
-            catch
-            {
-                MessageBox.Show("Your internet connection appears to be down or URL not found. Please check it and try again",
-                    "Communications Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                Directory.CreateDirectory(uploadFolderWithDate);
             }
 
 
+            string hostAddress = ConfigurationManager.AppSettings.Get("HostAddress");
+            string userId = ConfigurationManager.AppSettings.Get("UserId");
+            string password = ConfigurationManager.AppSettings.Get("Password");
+            string port = ConfigurationManager.AppSettings.Get("Port");
+            var inputfiles = selectedFiles;
+            foreach (string uploadingFile in selectedFiles)
+            {
+                try
+                {
 
-           
+                    FileInfo f = new FileInfo(uploadingFile);
+                    string uploadfile = f.FullName;
+                    Console.WriteLine(f.Name);
+                    Console.WriteLine("uploadfile" + uploadfile);
+                    var client = new SftpClient(hostAddress, Int32.Parse(port), userId, password);
+                    client.Connect();
+                    if (client.IsConnected)
+                    {
+                        Console.WriteLine("I AM CONNECTED");
+                    }
+                    var fileStream = new FileStream(uploadfile, FileMode.Open);
+                    if (fileStream != null)
+                    {
+                        Console.WriteLine("YOU ARE NOT NULL");
+                    }
+                    client.BufferSize = 4 * 1024;
+                    client.UploadFile(fileStream, "/test1/" + f.Name, null);
 
 
+                    client.Disconnect();
+                    client.Dispose();
+                    string fileName = f.Name;
+                    IEnumerable<string> files = Directory.GetFiles(inputFolderPath).Where(f => f.Contains(fileName));
+                    string sourceFilePath = files.FirstOrDefault();
+                    System.IO.File.Move(sourceFilePath, uploadFolderWithDate + "/" + f.Name);
+
+
+                    //var test = new SourceFolder(null);
+                    //test.Close();
+                    MessageBox.Show(f.Name + " Upload Sucess!!");
+                    //string str = uploadFolderWithDate, Replace();
+                    //if (!File.Exists(str))
+                    //{
+                    //    File.Copy(file, str);
+                    //}
+                }
+                catch (Exception ex)
+                {
+
+                    //sftp.Disconnect();
+
+                    //throw new Exception($"{ex.Message} {ex.InnerException}");
+
+                    failedFiles.Add(uploadingFile);
+                    MessageBox.Show(failedFiles[0]);
+                    MessageBox.Show(ex.Message,
+                        "Communications Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+
+            Application.Current.Dispatcher.Invoke((Action)delegate
+            {
+                var test = new SourceFolder(selectedFiles);
+                test.Close();
+
+            });
         }
+          
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             worker.CancelAsync();
@@ -152,27 +196,27 @@ namespace MVVMFileMange.View
 
         public void hello(List<string> SelectedFiles)
         {
+
             List<string> selected = new List<string>();
             string fileName = string.Empty;
             foreach (string singleFile in SelectedFiles)
             {
-               
+
                 fileName = System.IO.Path.GetFileName(singleFile);
                 string name = fileName;
                 selected.Add(fileName);
 
-                selected.Add(new string(Name = fileName));
-               
+                //selected.Add(new string(Name = fileName));
+
             }
+            listbox.ItemsSource = selected;
             try
             {
-                
-                listbox.DataContext = selected;
+                listbox.DataContext = selected;//this will work if you change to mvvm pattern
                 //FilesDetails.SelectedFiles = SelectedFiles;
                 //lvDataBinding.ItemsSource = SelectedFiles;
 
                 //selected = selectedFiles;
-
             }
 
             //FilesDetails.SelectedFiles = selectedFiles;
@@ -241,6 +285,7 @@ namespace MVVMFileMange.View
                 destFile = System.IO.Path.Combine(destinationPath, fileName);
                 System.IO.File.Copy(s, destFile, true);
             }
+        
         }
 
 

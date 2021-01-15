@@ -5,9 +5,15 @@
     <Compile Update="ViewModel\SourceFolder.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\UploadWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="View\SourceFolder.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UploadWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
